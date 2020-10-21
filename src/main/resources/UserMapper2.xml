@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
+        "http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xzk.dao.UserDao2">
+
+<select id="finda" resultType="com.xzk.bean.User">
+    select * from tab_user where uid in
+    <foreach collection="list" item="uid" open="(" close=")" separator=",">
+        #{uid}
+    </foreach>
+</select>
+<select id="findc" resultType="com.xzk.bean.User">
+    select * from tab_user where uid in
+    <foreach collection="uids" item="uid" open="(" close=")" separator=",">
+        #{uid}
+    </foreach>
+</select>
+<select id="findb" resultType="com.xzk.bean.User">
+    select * from tab_user where uid in
+    <foreach collection="array" item="uid" open="(" close=")" separator=",">
+        #{uid}
+    </foreach>
+</select>
+
+    <select id="findd" resultType="com.xzk.bean.User">
+        select * from tab_user where 1=1
+        <if test="uid !=null and uid !=''">
+           and uid =#{uid}
+        </if>
+
+      <!--  <if test="username !=null and username !=''">
+            and username like '%${username}%'
+        </if>-->
+        <if test="username !=null and username !=''">
+            and username like "%" #{username}"%"
+        </if>
+    </select>
+
+    <select id="finde" resultType="com.xzk.bean.User">
+        select * from tab_user where uid between #{begin} and #{end}
+    </select>
+</mapper>

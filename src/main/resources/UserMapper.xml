@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN"
+        "http://mybatis.org/dtd//mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xzk.dao.UserDao">
+    <select id="getall" resultType="com.xzk.bean.User">
+            select * from tab_user
+    </select>
+    <select id="findById" parameterType="int" resultType="com.xzk.bean.User">
+        select * from tab_user where uid=#{uid}
+    </select>
+    <insert id="add" parameterType="com.xzk.bean.User" useGeneratedKeys="true" keyProperty="uid">
+        insert tab_user(username,password,name) values(#{username},#{password},#{name})
+    </insert>
+    <select id="avg" resultType="map">
+        select max(uid) max,min(uid) min,avg(uid) avg from tab_user
+    </select>
+
+</mapper>
